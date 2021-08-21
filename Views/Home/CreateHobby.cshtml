@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   @* <h1>ID: @ViewBag.LoggedInUser</h1> *@
+    <h1>Create a Hobby</h1>
+     @model Hobby 
+    <form asp-action="CreateHobbyPost" asp-controller="Home" method="post">
+        @* Hobby Name input *@
+        <span asp-validation-for="HobbyName"></span>
+        <label asp-for="HobbyName">HobbyName:</label>
+        <input type="text" asp-for="HobbyName"></input>
+        <br>
+        @* Hobby Description input *@
+        <span asp-validation-for="HobbyDescription"></span>
+        <label asp-for="HobbyDescription">Hobby Description:</label>
+        <input type="text" asp-for="HobbyDescription"></input>
+        <br>
+        @* hobby needs a userID in it so we put this users id in it in a hidden input *@
+        <input type="hidden" asp-for="UserId" value="@ViewBag.LoggedInUser">
+
+        <button type="submit">Create</button>
+    </form>
+
+</body>
+</html>

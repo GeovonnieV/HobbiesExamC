@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    @* <h1>Hobby ID: @ViewBag.SpecificHobby.HobbyId User ID: @ViewBag.LoggedInUser</h1> *@
+    <h1>@ViewBag.SpecificHobby.HobbyName</h1>
+    <h4>Description:</h4>
+    <p>@ViewBag.SpecificHobby.HobbyDescription</p>
+
+    @* users that like this hobby *@
+    <div>
+        <p>@ViewBag.SpecificHobby.HobbyName Enthusiasts:</p>
+            @{
+                foreach (var user in ViewBag.UsersThatLikeThisHobby)
+                {
+                    <p>@user.FirstName</p>
+                    
+                }
+            }
+        
+    </div>
+
+    @* button to add this user to that hobby *@
+
+    @model Enthusiast
+    <form asp-action="AddUserToHobby" asp-controller="Home" method="post">
+        @* needs the hobbies ID *@
+         <span asp-validation-for="HobbyId"></span>
+        <input type="hidden" asp-for="HobbyId" value="@ViewBag.SpecificHobby.HobbyId">
+        @* needs the users ID *@
+        <span asp-validation-for="UserId"></span>
+        <input type="hidden" asp-for="UserId" value="@ViewBag.LoggedInUser">
+
+        <button type="submit">Add To Hobbies</button>
+    </form>
+
+</body>
+</html>
